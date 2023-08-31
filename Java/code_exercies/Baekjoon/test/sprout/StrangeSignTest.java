@@ -1,9 +1,8 @@
+package sprout;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigInteger;
-
-import static org.junit.jupiter.api.Assertions.*;
+import sprout.StrangeSign;
 
 class StrangeSignTest {
     StrangeSign strangeSign = new StrangeSign();
