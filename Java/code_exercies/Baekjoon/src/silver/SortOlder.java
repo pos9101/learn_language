@@ -2,7 +2,9 @@ package silver;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 /**
  * Baekjoon 10814
@@ -14,16 +16,25 @@ public class SortOlder {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         final int N = Integer.parseInt(br.readLine());
-        LinkedList<Member> members = new LinkedList<>();
+        TreeMap<Short, LinkedList<String>> ascendingAgeMap = new TreeMap<>();
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-            Member newMember = new Member(Short.parseShort(st.nextToken()), st.nextToken());
-            joinMember(members, newMember);
+            short age = Short.parseShort(st.nextToken());
+            String name = st.nextToken();
+            if (ascendingAgeMap.containsKey(age)) {
+                ascendingAgeMap.get(age).add(name);
+            } else {
+                LinkedList<String> names = new LinkedList<>();
+                names.add(name);
+                ascendingAgeMap.put(age, names);
+            }
         }
 
-        for (int i = 0; i < members.size(); i++) {
-            Member member = members.get(i);
-            bw.write(member.getAge() + " " + member.getName() + "\n");
+        for (Map.Entry<Short, LinkedList<String>> entry : ascendingAgeMap.entrySet()) {
+            LinkedList<String> names = entry.getValue();
+            for (String name : names) {
+                bw.write(entry.getKey() + " " + name + "\n");
+            }
         }
 
         bw.flush();
@@ -31,43 +42,6 @@ public class SortOlder {
         bw.close();
     }
 
-    private static void joinMember(LinkedList<Member> members, Member newMember) {
-        boolean inserted = false;
-        final int index = searchBinary(members, newMember.getAge(), 0, members.size() -1);
-        if(index >= members.size()) {
-            members.addLast(newMember);
-        } else {
-            members.add(index, newMember);
-        }
-    }
+    
 
-    private static int searchBinary(LinkedList<Member> members, int value, int min, int max) {
-        if(min > max) {
-            return min;
-        }
-        int mid = (min + max) / 2;
-        if (value >= members.get(mid).getAge()) {
-            return searchBinary(members, value, mid + 1, max);
-        } else {
-            return searchBinary(members, value, min, mid - 1);
-        }
-    }
-
-    static class Member {
-        private final short age;
-        private final String name;
-
-        public Member(short age, String name) {
-            this.age = age;
-            this.name = name;
-        }
-
-        public Short getAge() {
-            return age;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 }
