@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 
+/**
+ * Baekjoon 1107
+ * @link https://www.acmicpc.net/problem/1107
+ */
 public class RemoteController {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
