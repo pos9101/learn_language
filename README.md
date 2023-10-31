@@ -5,13 +5,14 @@
 There are repository for Studying Programming Languages.
 
 # 학습 중인 언어
+Java
 C# 
 Scala
 Markdown
 
 
 # 학습 예정 언어
-Kothlin
+Kotlin
 Python
 Go
 Dart
